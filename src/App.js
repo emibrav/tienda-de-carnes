@@ -17,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Container = styled.div`
+  /* width: 100%; */
   max-width: 600px;
   margin: 0 auto;
   border: 0px solid blue;
@@ -38,15 +39,31 @@ const HeaderContainer = styled.div`
   align-items: center;
 `;
 
+const CartButton = styled.button`
+  background-color: green;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 1rem;
+  color: white;
+  height: 2.5rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 7px;
+`;
+
 function App() {
 
   const [ loading, setLoading ] = useState(false);
-  const [ APIdata, setAPIdata ] = useState([])
+  const [ APIdata, setAPIdata ] = useState([]);
+  const [ cart, setCart ] = useState([]);
 
 
   useEffect(() => {
     setLoading(true)
-
     axios.get(INFO.sheet,
     {
       responseType: "blob"
@@ -68,7 +85,18 @@ function App() {
       })
       
     })
-  }, [])
+  }, []);
+
+  const handleAddToCart = (item) => {
+    setCart((cart) => cart.concat(item))
+  };
+
+  const handleRemoveFromCart = (id) => {
+    setCart(cart.filter(item => item.id !== id))
+  }
+
+  let total = cart.reduce((total, item) => parseInt(total) + parseInt(item.price), 0)
+
 
   return (
     <>
@@ -80,11 +108,13 @@ function App() {
             </Title>
               <SearchIcon />
           </HeaderContainer>
+      { loading ? <h3>Cargando cortes...</h3> : null }
           {
             APIdata.map(item => (
-              <Card product={item} key={item.id} />
-            ))
-          }
+              <Card handleAddToCart={() => handleAddToCart(item)} handleRemoveFromCart={() => handleRemoveFromCart(item.id)} product={item} key={item.id} />
+              ))
+            }
+            { cart.length ? <CartButton>Subtotal: ${total} - Ver compra</CartButton> : null }
         </Container>
     </>
   );

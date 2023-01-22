@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import AddIcon from "../icons/AddIcon";
-import RemoveIcon from "../icons/RemoveIcon"
+// import AddIcon from "../icons/AddIcon";
+// import RemoveIcon from "../icons/RemoveIcon"
 
 const CardContainer = styled.div`
   /* border: 1px solid red; */
@@ -33,19 +33,44 @@ const AddOrSubstractItemContainer = styled.div`
   max-height: 50%;
 `;
 
-const Card = ({product, handleAddToCart}) => {
+const AddButton = styled.button`
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+`;
 
-  const { name, price, image } = product
+const RemoveButton = styled.button`
+  background-color: transparent;
+  width: 50px;
+  height: 50px;
+  margin: 3px 10px;
+`;
+
+const Price = styled.span`
+  font-weight: bold;
+`;
+
+const AdditionalInfo = styled.p`
+  font-size: 17px;
+  color: red;
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+const Card = ({product, handleAddToCart, handleRemoveFromCart}) => {
+
+  const { name, price, wayToCount, image } = product
 
   return (
     <CardContainer>
       <ProductImage src={image} alt={name} />
       <ProductInfo>
-        <h3>{name}</h3>
-        <span>${price}</span>
+        <h3 >{name}</h3>
+        <AdditionalInfo>(Se pide {wayToCount})</AdditionalInfo>
+        <Price>${price} </Price><span>x kg</span>
         <AddOrSubstractItemContainer>
-          <RemoveIcon />
-          <AddIcon />
+          <RemoveButton onClick={handleRemoveFromCart}>➖</RemoveButton>
+          <AddButton onClick={handleAddToCart}>➕</AddButton>
         </AddOrSubstractItemContainer>
       </ProductInfo>
     </CardContainer>
