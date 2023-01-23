@@ -5,6 +5,8 @@ import {INFO} from "./app/constants";
 import Papa from "papaparse";
 import Card from "./components/Card";
 import SearchIcon from "./icons/SearchIcon";
+import Loading from "./components/Loading";
+import FilterBar from "./components/FilterBar";
 
 
 const GlobalStyles = createGlobalStyle`
@@ -26,7 +28,7 @@ const Container = styled.div`
 
 const Title = styled.h3`
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   `;
 
 const HeaderContainer = styled.div`
@@ -34,6 +36,7 @@ const HeaderContainer = styled.div`
   background-color: #3b3c66;
   padding: 1em;
   width: 100%;
+  height: 55px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,6 +53,7 @@ const CartButton = styled.button`
   margin-top: 1rem;
   color: white;
   height: 2.5rem;
+  border: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   padding: 7px;
@@ -108,7 +112,8 @@ function App() {
             </Title>
               <SearchIcon />
           </HeaderContainer>
-      { loading ? <h3>Cargando cortes...</h3> : null }
+      { loading ? <Loading /> : null }
+        <FilterBar products={APIdata} />
           {
             APIdata.map(item => (
               <Card handleAddToCart={() => handleAddToCart(item)} handleRemoveFromCart={() => handleRemoveFromCart(item.id)} product={item} key={item.id} />

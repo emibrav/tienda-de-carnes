@@ -29,29 +29,31 @@ const ProductInfo = styled.div`
 
 const AddOrSubstractItemContainer = styled.div`
   /* border: 1px solid red; */
-  min-height: 50px;
+  /* min-height: 50px; */
   max-height: 50%;
 `;
 
 const AddButton = styled.button`
   background-color: transparent;
-  width: 50px;
-  height: 50px;
+  width: 34px;
+  height: 34px;
 `;
 
 const RemoveButton = styled.button`
   background-color: transparent;
-  width: 50px;
-  height: 50px;
-  margin: 3px 10px;
+  width: 34px;
+  height: 34px;
+  margin-right: 15px;
+  margin-top: 8px;
 `;
 
 const Price = styled.span`
   font-weight: bold;
+  font-size: 18px;
 `;
 
 const AdditionalInfo = styled.p`
-  font-size: 17px;
+  font-size: 14px;
   color: red;
   font-weight: bold;
   margin-bottom: 5px;
@@ -65,7 +67,7 @@ const Card = ({product, handleAddToCart, handleRemoveFromCart}) => {
     <CardContainer>
       <ProductImage src={image} alt={name} />
       <ProductInfo>
-        <h3 >{name}</h3>
+        <h4>{name}</h4>
         <AdditionalInfo>(Se pide {wayToCount})</AdditionalInfo>
         <Price>${price} </Price><span>x kg</span>
         <AddOrSubstractItemContainer>
