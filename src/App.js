@@ -101,6 +101,7 @@ function App() {
 
   let total = cart.reduce((total, item) => parseInt(total) + parseInt(item.price), 0)
 
+  console.log(cart)
 
   return (
     <>
@@ -112,11 +113,13 @@ function App() {
             </Title>
               <SearchIcon />
           </HeaderContainer>
-      { loading ? <Loading /> : null }
         <FilterBar products={APIdata} />
+      { loading ? <Loading /> : null }
           {
             APIdata.map(item => (
-              <Card handleAddToCart={() => handleAddToCart(item)} handleRemoveFromCart={() => handleRemoveFromCart(item.id)} product={item} key={item.id} />
+              <Card 
+                key={item.id}
+                handleAddToCart={() => handleAddToCart(item)} handleRemoveFromCart={() => handleRemoveFromCart(item.id)} product={item} />
               ))
             }
             { cart.length ? <CartButton>Subtotal: ${total} - Ver compra</CartButton> : null }

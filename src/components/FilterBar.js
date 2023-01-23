@@ -26,7 +26,6 @@ const FilterButton = styled.button`
 `;
 
 const FilterBar = (products) => {
-    console.log(products)
     return (
         <>
             <FilterBarContainer>
