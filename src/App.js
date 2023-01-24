@@ -66,7 +66,7 @@ function App() {
   const [ APIdata, setAPIdata ] = useState([]);
   const [ cart, setCart ] = useState([]);
   const [ totalPrice, setTotalPrice ] = useState(0);
-
+  const [ filteredProducts, setFilteredProducts ] = useState([])
 
   useEffect(() => {
     setLoading(true)
@@ -81,6 +81,7 @@ function App() {
           header: true,
           complete: (results) => {
             setAPIdata(results.data);
+            setFilteredProducts(results.data);
             return resolve(results.data);
           },
           error: (error) => {
@@ -122,10 +123,10 @@ function App() {
             </Title>
               <SearchIcon />
           </HeaderContainer>
-        <FilterBar products={APIdata} />
+        <FilterBar products={APIdata} setFilteredProducts={setFilteredProducts} />
         { loading ? <Spinner /> : null }
           {
-            APIdata.map(item => (
+            filteredProducts.map(item => (
               <Card 
                 key={item.id}
                 handleAddToCart={() => handleAddToCart(item)} handleRemoveFromCart={() => handleRemoveFromCart(item.id)} product={item} />
