@@ -64,7 +64,7 @@ function App() {
   const [ loading, setLoading ] = useState(false);
   const [ APIdata, setAPIdata ] = useState([]);
   const [ cart, setCart ] = useState([]);
-  const [ amountToPay, setAmountToPay ] = useState(0);
+  const [ totalPrice, setTotalPrice ] = useState(0);
 
 
   useEffect(() => {
@@ -92,30 +92,31 @@ function App() {
     })
   }, []);
   
-  // let montoAPagar = 0;
+  useEffect(() => {
+    setTotalPrice(cart.reduce((acc, product) => acc + parseInt(product.price), 0))
+  }, [cart])
+
   const handleAddToCart = (product) => {
-    let isProductInCart = cart.find(item => item.id === product.id)
-    setAmountToPay(parseInt(amountToPay) + parseInt(product.price))
-    // console.log(isProductInCart)
-    if(!isProductInCart) {
-      cart.push(product)
-      // setCart((cart) => cart.concat(product));
-      // setAmountToPay(amountToPay + product.price)
-    }
+    setCart((cart) => cart.concat(product))
+    setTotalPrice(cart.reduce((acc, product) => acc + parseInt(product.price), 0))
   };
-
-  const handleRemoveFromCart = (product) => {
-    let isProductInCart = cart.find(item => item.id === product.id)
-    
-    if(isProductInCart) {
-      setCart(cart.filter(item => item.id !== product.id))
-      setAmountToPay(parseInt(amountToPay) - parseInt(product.price))
-    }
-  }
-
+  
   // let total = cart.reduce((total, item) => parseInt(total) + parseInt(item.price), 0)
 
-  // console.log(cart)
+  // let total = cart.reduce((acc, product) => acc + parseInt(product.price), 0)
+
+  const handleRemoveFromCart = (id) => {
+    let index = cart.findIndex(product => product.id === id);
+    if(index !== -1){
+      let newCart = [...cart];
+      newCart.splice(index, 1);
+      setCart(newCart);
+      setTotalPrice(newCart.reduce((acc, product) => acc + parseInt(product.price), 0))
+    }
+    // console.log(total)
+    // console.log(cart)
+  }
+
 
   return (
     <>
@@ -133,10 +134,10 @@ function App() {
             APIdata.map(item => (
               <Card 
                 key={item.id}
-                handleAddToCart={() => handleAddToCart(item)} handleRemoveFromCart={() => handleRemoveFromCart(item)} product={item} />
+                handleAddToCart={() => handleAddToCart(item)} handleRemoveFromCart={() => handleRemoveFromCart(item.id)} product={item} />
               ))
             }
-            { cart.length ? <CartButton>Subtotal: ${amountToPay} - Ver compra</CartButton> : null }
+            { cart.length ? <CartButton>Subtotal: ${totalPrice} - Ver compra</CartButton> : null }
         </Container>
     </>
   );
