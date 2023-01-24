@@ -7,6 +7,7 @@ import Card from "./components/Card";
 import SearchIcon from "./icons/SearchIcon";
 import Loading from "./components/Loading";
 import FilterBar from "./components/FilterBar";
+import Spinner from "./components/Spinner";
 
 
 const GlobalStyles = createGlobalStyle`
@@ -101,10 +102,6 @@ function App() {
     setTotalPrice(cart.reduce((acc, product) => acc + parseInt(product.price), 0))
   };
   
-  // let total = cart.reduce((total, item) => parseInt(total) + parseInt(item.price), 0)
-
-  // let total = cart.reduce((acc, product) => acc + parseInt(product.price), 0)
-
   const handleRemoveFromCart = (id) => {
     let index = cart.findIndex(product => product.id === id);
     if(index !== -1){
@@ -113,10 +110,7 @@ function App() {
       setCart(newCart);
       setTotalPrice(newCart.reduce((acc, product) => acc + parseInt(product.price), 0))
     }
-    // console.log(total)
-    // console.log(cart)
   }
-
 
   return (
     <>
@@ -129,7 +123,7 @@ function App() {
               <SearchIcon />
           </HeaderContainer>
         <FilterBar products={APIdata} />
-      { loading ? <Loading /> : null }
+        { loading ? <Spinner /> : null }
           {
             APIdata.map(item => (
               <Card 
