@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const FilterContainer = styled.div`
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 `;
 
@@ -13,7 +14,7 @@ const FilterOption = styled.button`
   font-weight: bold;
   border: none;
   margin: 0 10px;
-  padding: 10px 20px;
+  padding: 10px 12px;
   cursor: pointer;
   &:hover {
     background-color: black;
@@ -22,12 +23,16 @@ const FilterOption = styled.button`
 `;
 
 const FilterBar = ({ products, setFilteredProducts }) => {
-  const [filter, setFilter] = useState("Todos");
+  // const [filter, setFilter] = useState("Todos");
 
   const handleFilter = (category) => {
-    setFilter(category);
+    // setFilter(category);
     if (category === "Todos") {
       setFilteredProducts(products);
+    } else if (category === "promocion") {
+      setFilteredProducts(
+        products.filter((product) => product.isPromotion === "si")
+      );
     } else {
       setFilteredProducts(
         products.filter((product) => product.category === category)
@@ -38,6 +43,9 @@ const FilterBar = ({ products, setFilteredProducts }) => {
   return (
     <FilterContainer>
       <FilterOption onClick={() => handleFilter("Todos")}>Todos</FilterOption>
+      <FilterOption onClick={() => handleFilter("promocion")}>
+        Oferta
+      </FilterOption>
       <FilterOption onClick={() => handleFilter("cerdo")}>Cerdo</FilterOption>
       <FilterOption onClick={() => handleFilter("molida")}>Molida</FilterOption>
     </FilterContainer>

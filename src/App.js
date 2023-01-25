@@ -21,7 +21,8 @@ const GlobalStyles = createGlobalStyle`
 const Container = styled.div`
   position: relative;
   /* z-index: 0; */
-  max-width: 600px;
+  width: 100%;
+  max-width: 687px;
   margin: 0 auto;
   border: 0px solid blue;
   height: 100%;
@@ -49,7 +50,7 @@ const HeaderContainer = styled.div`
 
 const CartButton = styled.button`
   background-color: green;
-  position: sticky;
+  position: fixed;
   cursor: pointer;
   width: 100%;
   bottom: 0;
