@@ -30,7 +30,7 @@ const Spinner = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDots(dots => [...dots.slice(1), ""]);
+      setDots((dots) => [...dots.slice(1), ""]);
     }, 300);
     return () => clearInterval(interval);
   }, []);
@@ -42,5 +42,5 @@ const Spinner = () => {
       ))}
     </DotsContainer>
   );
-}
+};
 export default Spinner;

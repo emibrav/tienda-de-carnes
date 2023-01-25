@@ -10,6 +10,7 @@ const FilterContainer = styled.div`
 const FilterOption = styled.button`
   background-color: white;
   color: black;
+  font-weight: bold;
   border: none;
   margin: 0 10px;
   padding: 10px 20px;
