@@ -23,7 +23,8 @@ const Container = styled.div`
   /* z-index: 0; */
   width: 100%;
   max-width: 687px;
-  margin: 0 auto;
+  margin-inline: auto;
+  margin-bottom: 3.5em;
   border: 0px solid blue;
   height: 100%;
 
@@ -54,16 +55,18 @@ const CartButton = styled.button`
   cursor: pointer;
   width: 100%;
   bottom: 0;
-  text-align: center;
-  font-size: 25px;
+  font-size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   color: white;
   height: 2.5rem;
   border: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  padding: 7px;
+  padding: 17px 7px;
 `;
 
 function App() {
@@ -100,35 +103,47 @@ function App() {
 
   useEffect(() => {
     setTotalPrice(
-      cart.reduce((acc, product) => acc + parseInt(product.price), 0)
+      cart.reduce(
+        (acc, product) => acc + parseInt(product.price * product.count),
+        0
+      )
     );
   }, [cart]);
 
   const handleAddToCart = (product) => {
-    setCart((cart) => cart.concat(product));
-    setTotalPrice(
-      cart.reduce((acc, product) => acc + parseInt(product.price), 0)
-    );
-  };
-
-  const handleRemoveFromCart = (id) => {
-    let index = cart.findIndex((product) => product.id === id);
-    if (index !== -1) {
-      let newCart = [...cart];
-      newCart.splice(index, 1);
-      setCart(newCart);
-      setTotalPrice(
-        newCart.reduce((acc, product) => acc + parseInt(product.price), 0)
+    let isProductInCart = cart.find((p) => p.id === product.id);
+    if (!isProductInCart) {
+      setCart([...cart, { ...product, count: 1 }]);
+    } else {
+      setCart(
+        cart.map((p) => {
+          if (p.id === product.id) {
+            return { ...p, count: p.count + 1 };
+          } else {
+            return p;
+          }
+        })
       );
     }
   };
-  const countByProduct = (cart) => {
-    const counts = new Map();
-    for (const item of cart) {
-      const count = counts.get(item.id) || 0;
-      counts.set(item.id, count + 1);
+
+  const handleRemoveFromCart = (product) => {
+    let isProductInCart = cart.find((p) => p.id === product.id);
+    if (isProductInCart) {
+      if (isProductInCart.count > 1) {
+        setCart(
+          cart.map((p) => {
+            if (p.id === product.id) {
+              return { ...p, count: p.count - 1 };
+            } else {
+              return p;
+            }
+          })
+        );
+      } else {
+        setCart(cart.filter((p) => p.id !== product.id));
+      }
     }
-    return counts;
   };
 
   return (
@@ -138,9 +153,9 @@ function App() {
         {isOpen ? (
           <Cart
             setIsOpen={setIsOpen}
-            countByProduct={countByProduct}
             products={cart}
             setCart={setCart}
+            totalPrice={totalPrice}
           />
         ) : null}
         <HeaderContainer>
@@ -156,13 +171,15 @@ function App() {
           <Card
             key={item.id}
             handleAddToCart={() => handleAddToCart(item)}
-            handleRemoveFromCart={() => handleRemoveFromCart(item.id)}
+            handleRemoveFromCart={() => handleRemoveFromCart(item)}
             product={item}
           />
         ))}
         {cart.length ? (
           <CartButton onClick={() => setIsOpen(!isOpen)}>
-            Subtotal: ${totalPrice} - {isOpen ? "Ver productos" : "Ver compra"}
+            {isOpen
+              ? "Finalizar pedido por Whatsapp"
+              : `Subtotal $${totalPrice} - Ver compra`}
           </CartButton>
         ) : null}
       </Container>
