@@ -19,6 +19,8 @@ const CartContainer = styled.div`
 
 const CartHeader = styled.div`
   display: flex;
+  width: inherit;
+  max-width: 680px;
   justify-content: space-between;
   margin-bottom: 0.5rem;
 `;

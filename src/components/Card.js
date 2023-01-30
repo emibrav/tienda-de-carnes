@@ -5,8 +5,9 @@ import styled from "styled-components";
 const CardContainer = styled.div`
   /* border: 1px solid red; */
   width: 90%;
-  max-width: 487px; 
+  max-width: 487px;
   margin: 1em auto;
+  /* border: ${(props) => (props.selected ? "2px solid green" : "null")}; */
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
@@ -24,7 +25,7 @@ const ProductImage = styled.img`
 const ProductInfo = styled.div`
   border-left: 1px solid #e4e9f5;
   min-width: 60%;
-  padding: .5em;
+  padding: 0.5em;
 `;
 
 const AddOrSubstractItemContainer = styled.div`
@@ -37,11 +38,17 @@ const AddButton = styled.button`
   background-color: transparent;
   width: 34px;
   height: 34px;
+  cursor: pointer;
+  border: 2px solid green;
+  border-radius: 5px;
 `;
 
 const RemoveButton = styled.button`
   background-color: transparent;
+  border: 1px solid red;
+  border-radius: 5px;
   width: 34px;
+  cursor: pointer;
   height: 34px;
   margin-right: 15px;
   margin-top: 8px;
@@ -59,24 +66,28 @@ const AdditionalInfo = styled.p`
   margin-bottom: 5px;
 `;
 
-const Card = ({product, handleAddToCart, handleRemoveFromCart}) => {
+// const isProductInCart (id) => {
+//     return product.find((p) => p.id === product.id);
+// }
 
-  const { name, price, wayToCount, image } = product
+const Card = ({ product, handleAddToCart, handleRemoveFromCart, selected }) => {
+  const { name, price, wayToCount, image } = product;
 
   return (
-    <CardContainer>
+    <CardContainer selected={selected}>
       <ProductImage src={image} alt={name} />
       <ProductInfo>
         <h4>{name}</h4>
         <AdditionalInfo>(Se pide {wayToCount})</AdditionalInfo>
-        <Price>${price} </Price><span>x kg</span>
+        <Price>${price} </Price>
+        <span>x kg</span>
         <AddOrSubstractItemContainer>
           <RemoveButton onClick={handleRemoveFromCart}>➖</RemoveButton>
           <AddButton onClick={handleAddToCart}>➕</AddButton>
         </AddOrSubstractItemContainer>
       </ProductInfo>
     </CardContainer>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;

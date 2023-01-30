@@ -8,6 +8,7 @@ import SearchIcon from "./icons/SearchIcon";
 import FilterBar from "./components/FilterBar";
 import Spinner from "./components/Spinner";
 import Cart from "./components/Cart";
+import Search from "./components/Search";
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -22,14 +23,14 @@ const Container = styled.div`
   position: relative;
   /* z-index: 0; */
   width: 100%;
-  max-width: 687px;
+  max-width: 840px;
   margin-inline: auto;
   margin-bottom: 3.5em;
   border: 0px solid blue;
   height: 100%;
 
-  @media screen and (min-width: 487px) {
-    width: 80%;
+  @media screen and (min-width: 520px) {
+    width: 100%;
   }
 `;
 
@@ -54,6 +55,7 @@ const CartButton = styled.button`
   position: fixed;
   cursor: pointer;
   width: 100%;
+  /* max-width: 820px; */
   bottom: 0;
   font-size: 22px;
   display: flex;
@@ -67,6 +69,11 @@ const CartButton = styled.button`
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   padding: 17px 7px;
+
+  @media screen and (min-width: 400px) {
+    max-width: 840px;
+    margin-inline-start: auto;
+  }
 `;
 
 function App() {
@@ -76,6 +83,7 @@ function App() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  // const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -160,7 +168,8 @@ function App() {
         ) : null}
         <HeaderContainer>
           <Title className="App">Tienda de carnes</Title>
-          <SearchIcon />
+          {/* <SearchIcon onClick={() => setIsSearchOpen(true)} /> */}
+          {/* {isSearchOpen ? <Search /> : null} */}
         </HeaderContainer>
         <FilterBar
           products={APIdata}
@@ -173,6 +182,7 @@ function App() {
             handleAddToCart={() => handleAddToCart(item)}
             handleRemoveFromCart={() => handleRemoveFromCart(item)}
             product={item}
+            selected={filteredProducts.includes(item)}
           />
         ))}
         {cart.length ? (
