@@ -6,20 +6,32 @@ const CardContainer = styled.div`
   /* border: 1px solid red; */
   width: 90%;
   max-width: 487px;
+  max-height: 135px;
   margin: 1em auto;
   /* border: ${(props) => (props.selected ? "2px solid green" : "null")}; */
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
   overflow: hidden;
+
   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0.1, 0.3);
 `;
 
+const ImageContainer = styled.div`
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
 const ProductImage = styled.img`
-  /* border: 1 px solid red; */
-  max-width: 40%;
-  height: 100px;
-  border-radius: inherit;
+  /* border: 1px solid red; */
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  max-height: 200px;
+  object-fit: cover;
 `;
 
 const ProductInfo = styled.div`
@@ -75,7 +87,9 @@ const Card = ({ product, handleAddToCart, handleRemoveFromCart, selected }) => {
 
   return (
     <CardContainer selected={selected}>
-      <ProductImage src={image} alt={name} />
+      <ImageContainer>
+        <ProductImage src={image} alt={name} />
+      </ImageContainer>
       <ProductInfo>
         <h4>{name}</h4>
         <AdditionalInfo>(Se pide {wayToCount})</AdditionalInfo>
