@@ -2,11 +2,16 @@ import styled from "styled-components";
 import { INFO } from "../app/constants";
 
 const CartContainer = styled.div`
+  border: 1px solid tomato;
   position: fixed;
   z-index: 1;
-  width: 80%;
+  width: 56%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
+  margin-inline: auto;
   box-sizing: border-box;
   background-color: white;
   /* transition: all 0.5s ease-in-out; */
@@ -173,18 +178,24 @@ function Cart({
             </RemoveItemButton>
           </CartList>
         ))}
-        <Total>Total $ {totalPrice}*</Total>
+        <Total>
+          {!totalPrice ? "El pedido ha quedado vacío" : `Total $${totalPrice}`}
+        </Total>
         <PiecesInfo>
           (*)Recuerde que si su pedido incluye cortes por pieza, el monto total
           es un estimado, queda sujeto al pesaje de la misma
         </PiecesInfo>
         <DeleteButton onClick={() => setCart([])}>Borrar todo</DeleteButton>
+        {!totalPrice ? null : (
+          <CheckOutButton
+            href={`https://wa.me/${INFO.phone}?text=${encodeURIComponent(
+              text
+            )}`}
+          >
+            Finalizar compra por Whatsapp
+          </CheckOutButton>
+        )}
       </CartContainer>
-      <CheckOutButton
-        href={`https://wa.me/${INFO.phone}?text=${encodeURIComponent(text)}`}
-      >
-        Finalizar compra por Whatsapp
-      </CheckOutButton>
     </>
   );
 }
