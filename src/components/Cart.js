@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { INFO } from "../app/constants";
 
 const CartContainer = styled.div`
   position: fixed;
@@ -140,7 +141,7 @@ function Cart({ products, setCart, totalPrice, isOpen, setIsOpen }) {
         <DeleteButton onClick={() => setCart([])}>Borrar todo</DeleteButton>
       </CartContainer>
       <CheckOutButton
-        href={`https://wa.me/5493512297944?text=${encodeURIComponent(text)}`}
+        href={`https://wa.me/${INFO.phone}?text=${encodeURIComponent(text)}`}
       >
         Finalizar compra por Whatsapp
       </CheckOutButton>
