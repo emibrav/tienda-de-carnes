@@ -33,7 +33,9 @@ const CartHeader = styled.div`
 
 const CloseButton = styled.button`
   background-color: transparent;
-  padding: 4px 10px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 4px 8px;
   cursor: pointer;
   border: 1px solid red;
   border-radius: 5px;
