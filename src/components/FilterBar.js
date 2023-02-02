@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import styled from "styled-components";
 
 const FilterContainer = styled.div`
@@ -6,6 +6,15 @@ const FilterContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: white;
+  border-bottom: 1px solid grey;
+
+  &.sticky {
+    position: static;
+  }
 `;
 
 const FilterOption = styled.button`
@@ -16,13 +25,14 @@ const FilterOption = styled.button`
   margin: 0 10px;
   padding: 10px 12px;
   cursor: pointer;
-  &:hover {
+  &:hover,
+  :active {
     background-color: black;
     color: white;
   }
 `;
 
-const FilterBar = ({ products, setFilteredProducts }) => {
+const FilterBar = ({ products, setFilteredProducts, isOpen }) => {
   // const [filter, setFilter] = useState("Todos");
 
   const handleFilter = (category) => {
@@ -41,7 +51,7 @@ const FilterBar = ({ products, setFilteredProducts }) => {
   };
 
   return (
-    <FilterContainer>
+    <FilterContainer className={` ${isOpen ? "sticky" : "null"} `}>
       <FilterOption onClick={() => handleFilter("Todos")}>Todos</FilterOption>
       <FilterOption onClick={() => handleFilter("promocion")}>
         Oferta

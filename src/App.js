@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 import { INFO } from "./app/constants";
 import Papa from "papaparse";
 import Card from "./components/Card";
-import SearchIcon from "./icons/SearchIcon";
 import FilterBar from "./components/FilterBar";
 import Spinner from "./components/Spinner";
 import Cart from "./components/Cart";
-import Search from "./components/Search";
 
 const GlobalStyles = createGlobalStyle`
   * {
@@ -41,7 +39,8 @@ const Title = styled.h3`
 
 const HeaderContainer = styled.div`
   // border: 1px solid red;
-  background-color: #3b3c66;
+  /* background-color: #3b3c66; */
+  background-color: #03a9f4;
   padding: 1em;
   width: 100%;
   height: 55px;
@@ -51,7 +50,7 @@ const HeaderContainer = styled.div`
 `;
 
 const CartButton = styled.button`
-  background-color: green;
+  background-color: #128c7e;
   position: fixed;
   cursor: pointer;
   width: 100%;
@@ -172,6 +171,7 @@ function App() {
           {/* {isSearchOpen ? <Search /> : null} */}
         </HeaderContainer>
         <FilterBar
+          isOpen={isOpen}
           products={APIdata}
           setFilteredProducts={setFilteredProducts}
         />
@@ -182,6 +182,7 @@ function App() {
             handleAddToCart={() => handleAddToCart(item)}
             handleRemoveFromCart={() => handleRemoveFromCart(item)}
             product={item}
+            cart={cart}
             selected={filteredProducts.includes(item)}
           />
         ))}

@@ -46,7 +46,9 @@ const PiecesInfo = styled.p`
 `;
 
 const CheckOutButton = styled.a`
-  background-color: green;
+  /* background-color: #128c7e; */
+  background-color: #25d366;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   position: fixed;
   cursor: pointer;
   width: 50%;
@@ -66,6 +68,11 @@ const CheckOutButton = styled.a`
   border-top-right-radius: 5px;
   padding: 17px 7px;
 
+  &:hover {
+    background-color: #5dc246;
+    cursor: pointer;
+  }
+
   @media screen and (max-width: 680px) {
     width: 100%;
   }
@@ -75,6 +82,24 @@ const Total = styled.p`
   font-size: large;
   font-weight: bolder;
   margin-top: 1rem;
+`;
+
+const DeleteButton = styled.button`
+  width: 100px;
+  height: 40px;
+  background-color: #ff4136;
+  color: #fff;
+  margin-top: 1rem;
+  font-weight: bold;
+  border-radius: 20px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ff0000;
+    box-shadow: 0px 0px 10px #ff0000;
+  }
 `;
 
 function Cart({ products, setCart, totalPrice, isOpen, setIsOpen }) {
@@ -100,7 +125,7 @@ function Cart({ products, setCart, totalPrice, isOpen, setIsOpen }) {
       <CartContainer isOpen={isOpen}>
         <CartHeader>
           <h4>Detalle de pedido:</h4>
-          <CloseButton onClick={() => setIsOpen(false)}> X </CloseButton>
+          <CloseButton onClick={() => setIsOpen(false)}> ↪ </CloseButton>
         </CartHeader>
         {products.map((item) => (
           <div key={item.id}>
@@ -112,6 +137,7 @@ function Cart({ products, setCart, totalPrice, isOpen, setIsOpen }) {
           (*)Recuerde que si su pedido incluye cortes por pieza, el monto total
           es un estimado, queda sujeto al pesaje de la misma
         </PiecesInfo>
+        <DeleteButton onClick={() => setCart([])}>Borrar todo</DeleteButton>
       </CartContainer>
       <CheckOutButton
         href={`https://wa.me/5493512297944?text=${encodeURIComponent(text)}`}
