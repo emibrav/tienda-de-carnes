@@ -159,6 +159,7 @@ function App() {
       <Container>
         {isOpen ? (
           <Cart
+            handleRemoveFromCart={handleRemoveFromCart}
             setIsOpen={setIsOpen}
             products={cart}
             setCart={setCart}
@@ -188,9 +189,7 @@ function App() {
         ))}
         {cart.length ? (
           <CartButton onClick={() => setIsOpen(!isOpen)}>
-            {isOpen
-              ? "Finalizar pedido por Whatsapp"
-              : `Subtotal $${totalPrice} - Ver compra`}
+            {`Subtotal $${totalPrice} - Ver compra`}
           </CartButton>
         ) : null}
       </Container>

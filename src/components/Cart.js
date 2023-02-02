@@ -40,6 +40,7 @@ const CloseButton = styled.button`
 `;
 
 const PiecesInfo = styled.p`
+  max-width: 487px;
   color: red;
   font-size: 15px;
   font-weight: bold;
@@ -47,7 +48,6 @@ const PiecesInfo = styled.p`
 `;
 
 const CheckOutButton = styled.a`
-  /* background-color: #128c7e; */
   background-color: #25d366;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   position: fixed;
@@ -61,7 +61,6 @@ const CheckOutButton = styled.a`
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  /* margin-top: 1rem; */
   color: white;
   height: 2.5rem;
   border: none;
@@ -70,7 +69,7 @@ const CheckOutButton = styled.a`
   padding: 17px 7px;
 
   &:hover {
-    background-color: #5dc246;
+    background-color: #32d399;
     cursor: pointer;
   }
 
@@ -103,7 +102,45 @@ const DeleteButton = styled.button`
   }
 `;
 
-function Cart({ products, setCart, totalPrice, isOpen, setIsOpen }) {
+const RemoveItemButton = styled.button`
+  background-color: transparent;
+  padding: 4px 10px;
+  font-size: 13px;
+  background-color: #ff4136;
+  color: #fff;
+  margin-left: 0.2rem;
+  font-weight: bold;
+  border-radius: 20px;
+  border: none;
+
+  &:hover {
+    background-color: red;
+    cursor: pointer;
+  }
+`;
+
+const CartList = styled.div`
+  width: 58%;
+
+  font-size: 18px;
+  margin-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (max-width: 487px) {
+    width: 100%;
+  }
+`;
+
+function Cart({
+  products,
+  setCart,
+  totalPrice,
+  isOpen,
+  setIsOpen,
+  handleRemoveFromCart,
+}) {
   const text = `Hola! Te paso mi pedido:
   ${products
     .reduce(
@@ -129,9 +166,12 @@ function Cart({ products, setCart, totalPrice, isOpen, setIsOpen }) {
           <CloseButton onClick={() => setIsOpen(false)}> ↪ </CloseButton>
         </CartHeader>
         {products.map((item) => (
-          <div key={item.id}>
+          <CartList key={item.id}>
             ▪ {item.name} ({item.count}kg) ${item.count * item.price}
-          </div>
+            <RemoveItemButton onClick={() => handleRemoveFromCart(item)}>
+              {item.count > 1 ? "restar 1kg" : "eliminar"}
+            </RemoveItemButton>
+          </CartList>
         ))}
         <Total>Total $ {totalPrice}*</Total>
         <PiecesInfo>
