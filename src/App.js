@@ -22,6 +22,9 @@ const Container = styled.div`
   /* z-index: 0; */
   width: 100%;
   max-width: 840px;
+  // display: flex;
+  // justify-content: center;
+  // flex-direction: column;
   margin-inline: auto;
   margin-bottom: 3.5em;
   border: 0px solid blue;
@@ -187,7 +190,7 @@ function App() {
             selected={filteredProducts.includes(item)}
           />
         ))}
-        {cart.length ? (
+        {cart.length && !isOpen ? (
           <CartButton onClick={() => setIsOpen(!isOpen)}>
             {`Subtotal $${totalPrice} - Ver compra`}
           </CartButton>

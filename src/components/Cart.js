@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { INFO } from "../app/constants";
 
 const CartContainer = styled.div`
-  border: 1px solid tomato;
   position: fixed;
   z-index: 1;
-  width: 56%;
+  width: 70%;
+  max-width: 840px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -17,7 +17,7 @@ const CartContainer = styled.div`
   /* transition: all 0.5s ease-in-out; */
   /* transform: translateX(1000px, 1000px); */
 
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: 1280px) {
     width: 100%;
     height: 100%;
   }
