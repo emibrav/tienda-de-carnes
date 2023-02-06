@@ -82,6 +82,7 @@ const CheckOutButton = styled.a`
 
   @media screen and (max-width: 680px) {
     width: 100%;
+    height: 3rem;
   }
 `;
 
