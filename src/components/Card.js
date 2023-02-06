@@ -1,19 +1,22 @@
+import { useState } from "react";
 import styled from "styled-components";
 // import AddIcon from "../icons/AddIcon";
 // import RemoveIcon from "../icons/RemoveIcon"
 
 const CardContainer = styled.div`
-  /* border: 1px solid red; */
   width: 90%;
   max-width: 487px;
   max-height: 135px;
   margin: 1em auto;
-  /* border: ${(props) => (props.selected ? "2px solid green" : "null")}; */
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0.1, 0.3);
+
+  @media screen and(min-width: 620px) {
+    width: 30%;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -89,11 +92,12 @@ const RemoveButton = styled.button`
   width: 34px;
   cursor: pointer;
   height: 34px;
-  margin-right: 15px;
+  background-color: #ff5656;
+  /* margin-right: 15px; */
   /* margin-top: 8px; */
 
   &:hover {
-    background-color: #ff5656;
+    background-color: #ff2256;
     color: white;
   }
 `;
@@ -110,27 +114,63 @@ const AdditionalInfo = styled.p`
   margin-bottom: 5px;
 `;
 
-// const isProductInCart (id) => {
-//     return product.find((p) => p.id === product.id);
-// }
+const NameAndCountContainer = styled.div`
+  display: flex;
+`;
 
-const Card = ({ product, handleAddToCart, handleRemoveFromCart, selected }) => {
+const Count = styled.div`
+  padding: 0.1rem 0.4rem;
+  /* margin: 0 0.1rem; */
+  color: green;
+  font-size: 16px;
+  font-weight: 900;
+`;
+
+const Card = ({ product, handleAddToCart, handleRemoveFromCart, cart }) => {
   const { name, price, wayToCount, image } = product;
 
+  const [count, setCount] = useState(0);
+
+  const addCount = () => {
+    setCount(count + 1);
+  };
+
+  const decreaseCount = () => {
+    if (count > 0) {
+      setCount(count - 1);
+    }
+  };
+
   return (
-    <CardContainer selected={selected}>
+    <CardContainer>
       <ImageContainer>
         <ProductImage src={image} alt={name} />
       </ImageContainer>
       <ProductInfo>
-        <h4>{name}</h4>
-        {selected}
+        <NameAndCountContainer>
+          <h4>{name}</h4>
+        </NameAndCountContainer>
         <AdditionalInfo>(Se pide {wayToCount})</AdditionalInfo>
-        <Price>${price} </Price>
-        <span>x kg</span>
+        <Price>${price} x kg </Price>
+        {/* <span>x kg</span> */}
         <AddOrSubstractItemContainer>
-          <RemoveButton onClick={handleRemoveFromCart}>➖</RemoveButton>
-          <AddButton onClick={handleAddToCart}>➕</AddButton>
+          <RemoveButton
+            onClick={() => {
+              handleRemoveFromCart();
+              decreaseCount();
+            }}
+          >
+            ➖
+          </RemoveButton>
+          <Count>{count > 0 ? count : null}</Count>
+          <AddButton
+            onClick={() => {
+              handleAddToCart();
+              addCount();
+            }}
+          >
+            ➕
+          </AddButton>
         </AddOrSubstractItemContainer>
       </ProductInfo>
     </CardContainer>

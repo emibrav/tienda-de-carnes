@@ -140,6 +140,10 @@ const CartList = styled.div`
   }
 `;
 
+const ButtonsContainer = styled.div`
+  display: flex;
+`;
+
 function Cart({
   products,
   setCart,
@@ -147,6 +151,7 @@ function Cart({
   isOpen,
   setIsOpen,
   handleRemoveFromCart,
+  handleAddToCart,
 }) {
   const text = `Hola! Te paso mi pedido:
   ${products
@@ -170,18 +175,25 @@ function Cart({
       <CartContainer isOpen={isOpen}>
         <CartHeader>
           <h4>Detalle de pedido:</h4>
-          <CloseButton onClick={() => setIsOpen(false)}> ↪ </CloseButton>
+          <CloseButton onClick={() => setIsOpen(false)}> ✖ </CloseButton>
         </CartHeader>
         {products.map((item) => (
           <CartList key={item.id}>
             ▪ {item.name} ({item.count}kg) ${item.count * item.price}
-            <RemoveItemButton onClick={() => handleRemoveFromCart(item)}>
-              {item.count > 1 ? "restar 1kg" : "eliminar"}
-            </RemoveItemButton>
+            <ButtonsContainer>
+              <RemoveItemButton onClick={() => handleRemoveFromCart(item)}>
+                {/* {item.count > 1 ? "-" : "eliminar"} */}-
+              </RemoveItemButton>
+              <RemoveItemButton onClick={() => handleAddToCart(item)}>
+                +
+              </RemoveItemButton>
+            </ButtonsContainer>
           </CartList>
         ))}
         <Total>
-          {!totalPrice ? "El pedido ha quedado vacío" : `Total $${totalPrice}`}
+          {!totalPrice
+            ? "El pedido ha quedado vacío"
+            : `Subtotal: $${totalPrice}`}
         </Total>
         <PiecesInfo>
           (*)Recuerde que si su pedido incluye cortes por pieza, el monto total

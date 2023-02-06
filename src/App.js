@@ -19,12 +19,8 @@ const GlobalStyles = createGlobalStyle`
 
 const Container = styled.div`
   position: relative;
-  /* z-index: 0; */
   width: 100%;
   max-width: 840px;
-  // display: flex;
-  // justify-content: center;
-  // flex-direction: column;
   margin-inline: auto;
   margin-bottom: 3.5em;
   border: 0px solid blue;
@@ -41,8 +37,6 @@ const Title = styled.h3`
 `;
 
 const HeaderContainer = styled.div`
-  // border: 1px solid red;
-  /* background-color: #3b3c66; */
   background-color: #03a9f4;
   padding: 1em;
   width: 100%;
@@ -78,6 +72,16 @@ const CartButton = styled.button`
   }
 `;
 
+const CardContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @media screen and (max-width: 620px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
 function App() {
   const [loading, setLoading] = useState(false);
   const [APIdata, setAPIdata] = useState([]);
@@ -85,7 +89,7 @@ function App() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  // const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -134,6 +138,7 @@ function App() {
           }
         })
       );
+      setCount(count + 1);
     }
   };
 
@@ -163,6 +168,7 @@ function App() {
         {isOpen ? (
           <Cart
             handleRemoveFromCart={handleRemoveFromCart}
+            handleAddToCart={handleAddToCart}
             setIsOpen={setIsOpen}
             products={cart}
             setCart={setCart}
@@ -180,16 +186,17 @@ function App() {
           setFilteredProducts={setFilteredProducts}
         />
         {loading ? <Spinner /> : null}
-        {filteredProducts.map((item) => (
-          <Card
-            key={item.id}
-            handleAddToCart={() => handleAddToCart(item)}
-            handleRemoveFromCart={() => handleRemoveFromCart(item)}
-            product={item}
-            cart={cart}
-            selected={filteredProducts.includes(item)}
-          />
-        ))}
+        <CardContainer>
+          {filteredProducts.map((item) => (
+            <Card
+              key={item.id}
+              handleAddToCart={() => handleAddToCart(item)}
+              handleRemoveFromCart={() => handleRemoveFromCart(item)}
+              product={item}
+              cart={cart}
+            />
+          ))}
+        </CardContainer>
         {cart.length && !isOpen ? (
           <CartButton onClick={() => setIsOpen(!isOpen)}>
             {`Subtotal $${totalPrice} - Ver compra`}
