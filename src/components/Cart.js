@@ -28,7 +28,8 @@ const CartHeader = styled.div`
   width: inherit;
   max-width: 680px;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.8rem;
 `;
 
 const CloseButton = styled.button`
@@ -113,7 +114,7 @@ const DeleteButton = styled.button`
 const RemoveItemButton = styled.button`
   background-color: transparent;
   padding: 4px 10px;
-  font-size: 13px;
+  font-size: 15px;
   background-color: #ff4136;
   color: #fff;
   margin-left: 0.2rem;
