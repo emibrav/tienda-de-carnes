@@ -1,6 +1,6 @@
 export const INFO = {
   title: "Tienda de Carnes",
-  phone: `3513333333`,
+  phone: `3512297944`,
   social: {
     instagram: "instagram.com/",
     facebook: "facebook.com/",

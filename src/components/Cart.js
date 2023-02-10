@@ -155,7 +155,7 @@ function Cart({
   handleRemoveFromCart,
   handleAddToCart,
 }) {
-  const text = `Hola! Te paso mi pedido:
+  const text = `MENSA DE PRUEBA - Hola! Te paso mi pedido:
   ${products
     .reduce(
       (message, item) =>
