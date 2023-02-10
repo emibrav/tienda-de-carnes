@@ -39,11 +39,17 @@ const FilterBar = ({ products, setFilteredProducts, isOpen }) => {
     // setFilter(category);
     if (category === "Todos") {
       setFilteredProducts(products);
-    } else if (category === "promocion") {
+    } else if (category === "Adidas") {
       setFilteredProducts(
-        products.filter((product) => product.isPromotion === "si")
+        products.filter((product) => product.category === "Adidas")
       );
-    } else {
+    }else if (category === "Air Force") {
+      setFilteredProducts(
+        products.filter((product) => product.category === "Air Force")
+      );
+    }  
+    
+    else {
       setFilteredProducts(
         products.filter((product) => product.category === category)
       );
@@ -53,11 +59,10 @@ const FilterBar = ({ products, setFilteredProducts, isOpen }) => {
   return (
     <FilterContainer className={` ${isOpen ? "sticky" : "null"} `}>
       <FilterOption onClick={() => handleFilter("Todos")}>Todos</FilterOption>
-      <FilterOption onClick={() => handleFilter("promocion")}>
-        Oferta
+      <FilterOption onClick={() => handleFilter("Adidas")}>
+        Adidas
       </FilterOption>
-      <FilterOption onClick={() => handleFilter("cerdo")}>Cerdo</FilterOption>
-      <FilterOption onClick={() => handleFilter("molida")}>Molida</FilterOption>
+      <FilterOption onClick={() => handleFilter("Air Force")}>Air Force</FilterOption>
     </FilterContainer>
   );
 };
