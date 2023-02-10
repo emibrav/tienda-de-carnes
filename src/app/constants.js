@@ -1,5 +1,5 @@
 export const INFO = {
-  title: "Tienda de Zapatillas",
+  title: "Tienda de Carnes",
   phone: `3512297944`,
   social: {
     instagram: "instagram.com/",
@@ -7,5 +7,5 @@ export const INFO = {
     twitter: "twitter.com/",
   },
   sheet:
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vTQ166Bkkz_sxKlRFAKMCLx1FftmxfqE9_-aW6iDqSOuowmJ0MVTkBW8KC1-HaKRPIh4Q-BYv_Gd9oD/pub?output=csv",
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vSNEOTQG-u9xvCjx9IMi5PaJyktbwDgaByxmI4VXWr4L6b1TqUoSYyP9ko_ly4jCDxLS-b4gkIEe9lV/pub?output=csv",
 };

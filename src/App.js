@@ -176,7 +176,7 @@ function App() {
           />
         ) : null}
         <HeaderContainer>
-          <Title className="App">{INFO.title}</Title>
+          <Title className="App">Tienda de carnes</Title>
           {/* <SearchIcon onClick={() => setIsSearchOpen(true)} /> */}
           {/* {isSearchOpen ? <Search /> : null} */}
         </HeaderContainer>

@@ -4,13 +4,12 @@ import styled from "styled-components";
 // import RemoveIcon from "../icons/RemoveIcon"
 
 const CardContainer = styled.div`
-  /* width: 0%; */
+  width: 90%;
   max-width: 487px;
-  /* max-height: 135px; */
+  max-height: 135px;
   margin: 1em auto;
   display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0.1, 0.3);
@@ -24,7 +23,7 @@ const ImageContainer = styled.div`
   /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 40%;
 `;
 
 const ProductImage = styled.img`
@@ -110,11 +109,7 @@ const Price = styled.span`
 
 const AdditionalInfo = styled.p`
   font-size: 14px;
-  width: 85px;
-  background-color: #3aa99c;
-  text-align: center;
-  border-radius: 20px;
-  color: white;
+  color: red;
   font-weight: bold;
   margin-bottom: 5px;
 `;
@@ -132,7 +127,7 @@ const Count = styled.div`
 `;
 
 const Card = ({ product, handleAddToCart, handleRemoveFromCart, cart }) => {
-  const { name, price, modelo, image } = product;
+  const { name, price, wayToCount, image } = product;
 
   const [count, setCount] = useState(0);
 
@@ -155,9 +150,9 @@ const Card = ({ product, handleAddToCart, handleRemoveFromCart, cart }) => {
         <NameAndCountContainer>
           <h4>{name}</h4>
         </NameAndCountContainer>
-        <AdditionalInfo>{modelo}</AdditionalInfo>
+        <AdditionalInfo>(Se pide {wayToCount})</AdditionalInfo>
+        <Price>${price} x kg </Price>
         {/* <span>x kg</span> */}
-        <Price>US$ {price}</Price>
         <AddOrSubstractItemContainer>
           <RemoveButton
             onClick={() => {

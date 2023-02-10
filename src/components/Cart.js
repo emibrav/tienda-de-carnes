@@ -181,7 +181,7 @@ function Cart({
         </CartHeader>
         {products.map((item) => (
           <CartList key={item.id}>
-            ▪ {item.name} (x{item.count}) ${item.count * item.price}
+            ▪ {item.name} ({item.count}kg) ${item.count * item.price}
             <ButtonsContainer>
               <RemoveItemButton onClick={() => handleRemoveFromCart(item)}>
                 {/* {item.count > 1 ? "-" : "eliminar"} */}-
@@ -197,10 +197,10 @@ function Cart({
             ? "El pedido ha quedado vacío"
             : `Subtotal: $${totalPrice}`}
         </Total>
-        {/* <PiecesInfo>
+        <PiecesInfo>
           (*)Recuerde que si su pedido incluye cortes por pieza, el monto total
           es un estimado, queda sujeto al pesaje de la misma
-        </PiecesInfo> */}
+        </PiecesInfo>
         <DeleteButton onClick={() => setCart([])}>Borrar todo</DeleteButton>
         {!totalPrice ? null : (
           <CheckOutButton
