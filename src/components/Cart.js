@@ -150,7 +150,7 @@ const ButtonsContainer = styled.div`
 
 function Cart({ products, setCart, totalPrice, isOpen, setIsOpen, handleRemoveFromCart, handleAddToCart }) {
   const text = `Hola! Te paso mi pedido:
-  ${products.reduce((message, item) => message.concat(`\n• ${item.name} - ${item.count}kg $${item.price * item.count}`), ``).concat(`\n\nTotal: $${products.reduce((total, item) => parseInt(total) + parseInt(item.price * item.count), 0)}`)}
+  ${products.reduce((message, item) => message.concat(`\n• ${item.name} - ${item.count}kg $${item.price * item.count}`), ``).concat(`\n\nSubtotal: $${products.reduce((total, item) => parseInt(total) + parseInt(item.price * item.count), 0)}`)}
   
   `
   return (
@@ -162,7 +162,8 @@ function Cart({ products, setCart, totalPrice, isOpen, setIsOpen, handleRemoveFr
         </CartHeader>
         {products.map((item) => (
           <CartList key={item.id}>
-            ▪ {item.name} ({item.count}kg) ${item.count * item.price}
+            ▪ {item.name} ({item.count}
+            {item.wayToCount === "por kg" ? "kg" : ""}): ${item.count * item.price}
             <ButtonsContainer>
               <RemoveItemButton onClick={() => handleRemoveFromCart(item)}>{/* {item.count > 1 ? "-" : "eliminar"} */}-</RemoveItemButton>
               <RemoveItemButton onClick={() => handleAddToCart(item)}>+</RemoveItemButton>
