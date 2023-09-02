@@ -149,7 +149,7 @@ const ButtonsContainer = styled.div`
 `
 
 function Cart({ products, setCart, totalPrice, isOpen, setIsOpen, handleRemoveFromCart, handleAddToCart }) {
-  const text = `MENSAJE DE PRUEBA - Hola! Te paso mi pedido:
+  const text = `Hola! Te paso mi pedido:
   ${products.reduce((message, item) => message.concat(`\n• ${item.name} - ${item.count}kg $${item.price * item.count}`), ``).concat(`\n\nTotal: $${products.reduce((total, item) => parseInt(total) + parseInt(item.price * item.count), 0)}`)}
   
   `

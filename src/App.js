@@ -157,7 +157,7 @@ function App() {
       <Container>
         {isOpen ? <Cart handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart} setIsOpen={setIsOpen} products={cart} setCart={setCart} totalPrice={totalPrice} /> : null}
         <HeaderContainer>
-          <Title className='App'>Tienda de carnes</Title>
+          <Title className='App'>{INFO.title}</Title>
           {/* <SearchIcon onClick={() => setIsSearchOpen(true)} /> */}
           {/* {isSearchOpen ? <Search /> : null} */}
         </HeaderContainer>

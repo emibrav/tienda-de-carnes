@@ -20,21 +20,17 @@ const CardContainer = styled.div`
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 40%;
+  width: 30%;
 `
 
 const ProductImage = styled.img`
   width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  max-height: 200px;
   object-fit: cover;
 `
 
 const ProductInfo = styled.div`
   border-left: 1px solid #e4e9f5;
-  min-width: 60%;
+  width: 70%;
   padding: 0.5em;
   font-size: 17px;
   overflow: hidden;
@@ -82,8 +78,6 @@ const RemoveButton = styled.button`
   cursor: pointer;
   height: 34px;
   background-color: #ff5656;
-  /* margin-right: 15px; */
-  /* margin-top: 8px; */
 
   &:hover {
     background-color: #ff2256;
@@ -109,7 +103,6 @@ const NameAndCountContainer = styled.div`
 
 const Count = styled.div`
   padding: 0.1rem 0.4rem;
-  /* margin: 0 0.1rem; */
   color: green;
   font-size: 16px;
   font-weight: 900;
@@ -140,7 +133,10 @@ const Card = ({ product, handleAddToCart, handleRemoveFromCart, cart }) => {
           <h4>{name}</h4>
         </NameAndCountContainer>
         <AdditionalInfo>(Se pide {wayToCount})</AdditionalInfo>
-        <Price>${price} x kg </Price>
+        <span>
+          <Price>${price} </Price>
+          {wayToCount === "por kg" ? "x kg" : "por pieza"}
+        </span>
         {/* <span>x kg</span> */}
         <AddOrSubstractItemContainer>
           <RemoveButton
