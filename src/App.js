@@ -158,8 +158,6 @@ function App() {
         {isOpen ? <Cart handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart} setIsOpen={setIsOpen} products={cart} setCart={setCart} totalPrice={totalPrice} /> : null}
         <HeaderContainer>
           <Title className='App'>{INFO.title}</Title>
-          {/* <SearchIcon onClick={() => setIsSearchOpen(true)} /> */}
-          {/* {isSearchOpen ? <Search /> : null} */}
         </HeaderContainer>
         <FilterBar isOpen={isOpen} products={APIdata} setFilteredProducts={setFilteredProducts} />
         {loading ? <Spinner /> : null}

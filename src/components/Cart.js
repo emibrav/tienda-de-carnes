@@ -13,10 +13,7 @@ const CartContainer = styled.div`
   padding: 20px;
   margin-inline: auto;
   overflow: auto;
-  /* box-sizing: border-box; */
   background-color: white;
-  /* transition: transform 1s ease-in-out; */
-  /* transform: translateX(1000%); */
 
   @media screen and (max-width: 1280px) {
     width: 100%;
@@ -89,7 +86,7 @@ const CheckOutButton = styled.a`
 `
 
 const Total = styled.p`
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
   margin-top: 1rem;
 `
@@ -157,15 +154,15 @@ function Cart({ products, setCart, totalPrice, isOpen, setIsOpen, handleRemoveFr
     <>
       <CartContainer isOpen={isOpen}>
         <CartHeader>
-          <h4>Detalle de pedido:</h4>
+          <h4>Detalle del pedido:</h4>
           <CloseButton onClick={() => setIsOpen(false)}> ✖ </CloseButton>
         </CartHeader>
         {products.map((item) => (
           <CartList key={item.id}>
-            ▪ {item.name} ({item.count}
-            {item.wayToCount === "por kg" ? "kg" : ""}): ${item.count * item.price}
+            ▪ {item.name} - ({item.count}
+            {item.wayToCount === "por kg" ? "kg" : ""}) : ${item.count * item.price}
             <ButtonsContainer>
-              <RemoveItemButton onClick={() => handleRemoveFromCart(item)}>{/* {item.count > 1 ? "-" : "eliminar"} */}-</RemoveItemButton>
+              <RemoveItemButton onClick={() => handleRemoveFromCart(item)}>-</RemoveItemButton>
               <RemoveItemButton onClick={() => handleAddToCart(item)}>+</RemoveItemButton>
             </ButtonsContainer>
           </CartList>
@@ -173,7 +170,7 @@ function Cart({ products, setCart, totalPrice, isOpen, setIsOpen, handleRemoveFr
         <Total>{!totalPrice ? "El pedido ha quedado vacío" : `Subtotal: $${totalPrice}`}</Total>
         <PiecesInfo>(*)Recuerde que si su pedido incluye cortes por pieza, el monto total es un estimado, queda sujeto al pesaje de la misma</PiecesInfo>
         <DeleteButton onClick={() => setCart([])}>Borrar todo</DeleteButton>
-        {!totalPrice ? null : <CheckOutButton href={`https://wa.me/${INFO.phone}?text=${encodeURIComponent(text)}`}>Finalizar compra por Whatsapp</CheckOutButton>}
+        {!totalPrice ? null : <CheckOutButton href={`https://wa.me/${INFO.phone}?text=${encodeURIComponent(text)}`}>Enviar pedido por Whatsapp</CheckOutButton>}
       </CartContainer>
     </>
   )

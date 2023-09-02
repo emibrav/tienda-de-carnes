@@ -132,12 +132,12 @@ const Card = ({ product, handleAddToCart, handleRemoveFromCart, cart }) => {
         <NameAndCountContainer>
           <h4>{name}</h4>
         </NameAndCountContainer>
-        <AdditionalInfo>(Se pide {wayToCount})</AdditionalInfo>
+        {wayToCount === "por pieza" ? <AdditionalInfo>({wayToCount})</AdditionalInfo> : null}
+
         <span>
           <Price>${price} </Price>
-          {wayToCount === "por kg" ? "x kg" : "por pieza"}
+          {wayToCount === "por kg" ? "x kg" : ""}
         </span>
-        {/* <span>x kg</span> */}
         <AddOrSubstractItemContainer>
           <RemoveButton
             onClick={() => {
