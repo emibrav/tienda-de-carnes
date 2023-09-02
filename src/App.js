@@ -21,11 +21,11 @@ const GlobalStyles = createGlobalStyle`
 const Container = styled.div`
   position: relative;
   width: 100%;
+  min-height: 100vh;
   max-width: 840px;
   margin-inline: auto;
   margin-bottom: 3.5rem;
   border: 0px solid blue;
-  height: 100%;
 
   @media screen and (min-width: 520px) {
     width: 100%;

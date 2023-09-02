@@ -2,7 +2,6 @@ import { useState } from "react"
 import styled from "styled-components"
 
 const CardContainer = styled.div`
-  height: 100vh;
   width: 90%;
   max-width: 487px;
   max-height: 135px;
