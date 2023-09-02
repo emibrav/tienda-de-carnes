@@ -1,13 +1,12 @@
-import { useState } from "react";
-import styled from "styled-components";
-// import AddIcon from "../icons/AddIcon";
-// import RemoveIcon from "../icons/RemoveIcon"
+import { useState } from "react"
+import styled from "styled-components"
 
 const CardContainer = styled.div`
+  height: 100vh;
   width: 90%;
   max-width: 487px;
   max-height: 135px;
-  margin: 1em auto;
+  margin: 0.5rem auto;
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
@@ -17,33 +16,26 @@ const CardContainer = styled.div`
   @media screen and(min-width: 620px) {
     width: 30%;
   }
-`;
+`
 
 const ImageContainer = styled.div`
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: center;
   width: 40%;
-`;
+`
 
 const ProductImage = styled.img`
-  /* border: 1px solid red; */
   width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
   max-height: 200px;
   object-fit: cover;
-`;
+`
 
 const ProductInfo = styled.div`
   border-left: 1px solid #e4e9f5;
   min-width: 60%;
-  /* padding: 0.5em;
-  font-size: 17px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; */
   padding: 0.5em;
   font-size: 17px;
   overflow: hidden;
@@ -52,15 +44,13 @@ const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
+`
 
 const AddOrSubstractItemContainer = styled.div`
-  /* border: 1px solid red; */
-  /* min-height: 50px; */
   max-height: 50%;
   display: flex;
   align-items: center;
-`;
+`
 
 const AddButton = styled.button`
   background-color: transparent;
@@ -78,7 +68,7 @@ const AddButton = styled.button`
   &:hover {
     background-color: #3aa99c;
   }
-`;
+`
 
 const RemoveButton = styled.button`
   background-color: transparent;
@@ -100,23 +90,23 @@ const RemoveButton = styled.button`
     background-color: #ff2256;
     color: white;
   }
-`;
+`
 
 const Price = styled.span`
   font-weight: bold;
   font-size: 18px;
-`;
+`
 
 const AdditionalInfo = styled.p`
   font-size: 14px;
   color: red;
   font-weight: bold;
   margin-bottom: 5px;
-`;
+`
 
 const NameAndCountContainer = styled.div`
   display: flex;
-`;
+`
 
 const Count = styled.div`
   padding: 0.1rem 0.4rem;
@@ -124,22 +114,22 @@ const Count = styled.div`
   color: green;
   font-size: 16px;
   font-weight: 900;
-`;
+`
 
 const Card = ({ product, handleAddToCart, handleRemoveFromCart, cart }) => {
-  const { name, price, wayToCount, image } = product;
+  const { name, price, wayToCount, image } = product
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   const addCount = () => {
-    setCount(count + 1);
-  };
+    setCount(count + 1)
+  }
 
   const decreaseCount = () => {
     if (count > 0) {
-      setCount(count - 1);
+      setCount(count - 1)
     }
-  };
+  }
 
   return (
     <CardContainer>
@@ -156,8 +146,8 @@ const Card = ({ product, handleAddToCart, handleRemoveFromCart, cart }) => {
         <AddOrSubstractItemContainer>
           <RemoveButton
             onClick={() => {
-              handleRemoveFromCart();
-              decreaseCount();
+              handleRemoveFromCart()
+              decreaseCount()
             }}
           >
             ➖
@@ -165,8 +155,8 @@ const Card = ({ product, handleAddToCart, handleRemoveFromCart, cart }) => {
           <Count>{count > 0 ? count : null}</Count>
           <AddButton
             onClick={() => {
-              handleAddToCart();
-              addCount();
+              handleAddToCart()
+              addCount()
             }}
           >
             ➕
@@ -174,7 +164,7 @@ const Card = ({ product, handleAddToCart, handleRemoveFromCart, cart }) => {
         </AddOrSubstractItemContainer>
       </ProductInfo>
     </CardContainer>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

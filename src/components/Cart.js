@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { INFO } from "../app/constants";
+import styled from "styled-components"
+import { INFO } from "../app/constants"
 
 const CartContainer = styled.div`
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   width: 70%;
   max-width: 840px;
   height: 100vh;
@@ -12,16 +12,17 @@ const CartContainer = styled.div`
   align-items: center;
   padding: 20px;
   margin-inline: auto;
-  box-sizing: border-box;
+  overflow: auto;
+  /* box-sizing: border-box; */
   background-color: white;
-  /* transition: all 0.5s ease-in-out; */
-  /* transform: translateX(1000px, 1000px); */
+  /* transition: transform 1s ease-in-out; */
+  /* transform: translateX(1000%); */
 
   @media screen and (max-width: 1280px) {
     width: 100%;
     height: 100%;
   }
-`;
+`
 
 const CartHeader = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ const CartHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.8rem;
-`;
+`
 
 const CloseButton = styled.button`
   background-color: transparent;
@@ -45,7 +46,7 @@ const CloseButton = styled.button`
     background-color: red;
     border: 1px solid white;
   }
-`;
+`
 
 const PiecesInfo = styled.p`
   max-width: 487px;
@@ -53,14 +54,14 @@ const PiecesInfo = styled.p`
   font-size: 15px;
   font-weight: bold;
   margin-top: 1rem;
-`;
+`
 
 const CheckOutButton = styled.a`
   background-color: #25d366;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   position: fixed;
   cursor: pointer;
-  width: 50%;
+  width: 100%;
   z-index: 10;
   text-decoration: none;
   bottom: 0;
@@ -70,7 +71,7 @@ const CheckOutButton = styled.a`
   align-items: center;
   font-weight: bold;
   color: white;
-  height: 2.5rem;
+  height: 3.5rem;
   border: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -85,13 +86,13 @@ const CheckOutButton = styled.a`
     width: 100%;
     height: 3rem;
   }
-`;
+`
 
 const Total = styled.p`
-  font-size: large;
-  font-weight: bolder;
+  font-size: 24px;
+  font-weight: 600;
   margin-top: 1rem;
-`;
+`
 
 const DeleteButton = styled.button`
   width: 100px;
@@ -99,6 +100,7 @@ const DeleteButton = styled.button`
   background-color: #ff4136;
   color: #fff;
   margin-top: 1rem;
+  margin-bottom: 4rem;
   font-weight: bold;
   border-radius: 20px;
   border: none;
@@ -109,7 +111,7 @@ const DeleteButton = styled.button`
     background-color: #ff0000;
     box-shadow: 0px 0px 10px #ff0000;
   }
-`;
+`
 
 const RemoveItemButton = styled.button`
   background-color: transparent;
@@ -126,12 +128,12 @@ const RemoveItemButton = styled.button`
     background-color: red;
     cursor: pointer;
   }
-`;
+`
 
 const CartList = styled.div`
   width: 58%;
-
   font-size: 18px;
+  font-weight: 600;
   margin-bottom: 0.2rem;
   display: flex;
   align-items: center;
@@ -140,38 +142,17 @@ const CartList = styled.div`
   @media screen and (max-width: 487px) {
     width: 100%;
   }
-`;
+`
 
 const ButtonsContainer = styled.div`
   display: flex;
-`;
+`
 
-function Cart({
-  products,
-  setCart,
-  totalPrice,
-  isOpen,
-  setIsOpen,
-  handleRemoveFromCart,
-  handleAddToCart,
-}) {
+function Cart({ products, setCart, totalPrice, isOpen, setIsOpen, handleRemoveFromCart, handleAddToCart }) {
   const text = `MENSAJE DE PRUEBA - Hola! Te paso mi pedido:
-  ${products
-      .reduce(
-        (message, item) =>
-          message.concat(
-            `\n• ${item.name} - ${item.count}kg $${item.price * item.count}`
-          ),
-        ``
-      )
-      .concat(
-        `\n\nTotal: $${products.reduce(
-          (total, item) => parseInt(total) + parseInt(item.price * item.count),
-          0
-        )}`
-      )}
+  ${products.reduce((message, item) => message.concat(`\n• ${item.name} - ${item.count}kg $${item.price * item.count}`), ``).concat(`\n\nTotal: $${products.reduce((total, item) => parseInt(total) + parseInt(item.price * item.count), 0)}`)}
   
-  `;
+  `
   return (
     <>
       <CartContainer isOpen={isOpen}>
@@ -183,37 +164,18 @@ function Cart({
           <CartList key={item.id}>
             ▪ {item.name} ({item.count}kg) ${item.count * item.price}
             <ButtonsContainer>
-              <RemoveItemButton onClick={() => handleRemoveFromCart(item)}>
-                {/* {item.count > 1 ? "-" : "eliminar"} */}-
-              </RemoveItemButton>
-              <RemoveItemButton onClick={() => handleAddToCart(item)}>
-                +
-              </RemoveItemButton>
+              <RemoveItemButton onClick={() => handleRemoveFromCart(item)}>{/* {item.count > 1 ? "-" : "eliminar"} */}-</RemoveItemButton>
+              <RemoveItemButton onClick={() => handleAddToCart(item)}>+</RemoveItemButton>
             </ButtonsContainer>
           </CartList>
         ))}
-        <Total>
-          {!totalPrice
-            ? "El pedido ha quedado vacío"
-            : `Subtotal: $${totalPrice}`}
-        </Total>
-        <PiecesInfo>
-          (*)Recuerde que si su pedido incluye cortes por pieza, el monto total
-          es un estimado, queda sujeto al pesaje de la misma
-        </PiecesInfo>
+        <Total>{!totalPrice ? "El pedido ha quedado vacío" : `Subtotal: $${totalPrice}`}</Total>
+        <PiecesInfo>(*)Recuerde que si su pedido incluye cortes por pieza, el monto total es un estimado, queda sujeto al pesaje de la misma</PiecesInfo>
         <DeleteButton onClick={() => setCart([])}>Borrar todo</DeleteButton>
-        {!totalPrice ? null : (
-          <CheckOutButton
-            href={`https://wa.me/${INFO.phone}?text=${encodeURIComponent(
-              text
-            )}`}
-          >
-            Finalizar compra por Whatsapp
-          </CheckOutButton>
-        )}
+        {!totalPrice ? null : <CheckOutButton href={`https://wa.me/${INFO.phone}?text=${encodeURIComponent(text)}`}>Finalizar compra por Whatsapp</CheckOutButton>}
       </CartContainer>
     </>
-  );
+  )
 }
 
-export default Cart;
+export default Cart
